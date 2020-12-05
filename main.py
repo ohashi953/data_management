@@ -53,6 +53,8 @@ def git_log(commit_hash, str):
 Make json file
 """
 
+value = []
+
 with open(args[1] + '/test.json', 'w') as f:
     f.write('')
 
@@ -64,10 +66,15 @@ for log in range(len(hash_list)):
           git_log(hash_list[log], '--format=%s'), get_param(hash_list[log]), get_file(hash_list[log])]
     d = dict(zip(keys, values))
 
-    with open(args[1]+'/test.json', 'a') as f:
-        json.dump(d, f, indent=2, ensure_ascii=False)
+    value.append(d)
 
-    print(d)
+dd = dict(zip(hash_list, value))
+
+with open(args[1] + '/test.json', 'a') as f:
+    json.dump(dd, f, indent=2, ensure_ascii=False)
+
+
+print(d)
 
 
 
